@@ -1,0 +1,84 @@
+<!-- input field Growth Type -->
+<div ng-controller="paymentParameterCtrl as ppc">
+<div class="form-group col-lg-6" ng-if="mc.myDisplay">
+  <label for="exampleSelect1">Growth Type</label>
+  <div class="main-input">
+    <span><input class="form-control input-field" type="text" placeholder="select" ng-model="ppc.pDetails.growthType"></span>
+    <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    </button>
+    <div class="dropdown-menu list-dropdown">
+      <input type="text" placeholder="select" class="search-field" ng-model="test7">
+      <ul ng-repeat="growthType in mc.jsonData.l_GrowthType | filter:test7 track by $index" ng-click="ppc.selectOption('growthType',growthType)">
+        <li>{{growthType}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- input field Fixed Growth -->
+<div class="form-group col-lg-6" ng-if="(ppc.pDetails.growthType != 'Percent')&&mc.myDisplay">
+  <label for="exampleSelect1">Fixed Growth</label>
+  <div class="main-input">
+    <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.fixedGrowth"></span>
+  </div>
+</div>
+
+<!-- input field Percent Growth -->
+<div class="form-group col-lg-6" ng-if="(ppc.pDetails.growthType == 'Percent') && myDisplay" >
+  <label for="exampleSelect1">Percent Growth</label>
+  <div class="main-input">
+    <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.percentGrowth"></span>
+  </div>
+</div>
+
+<div class="col-lg-12 col-md-12">
+  <!-- input field Number of Schedules -->
+  <div class="form-group col-lg-6" ng-if="mc.myDisplay">
+    <label for="exampleSelect1">Number Of Schedules</label>
+    <div class="main-input">
+      <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.noOfSchedules"></span>
+    </div>
+  </div>
+
+  <!-- input field every month -->
+  <div class="form-group col-lg-6" ng-if="mc.myDisplay">
+    <label for="exampleSelect1">Adjust Every (X) Month</label>
+    <div class="main-input">
+      <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.adjustMonth"></span>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-12 col-md-12">
+  <div class="form-group col-lg-4" ng-if="mc.myDisplay">
+    <label for="exampleSelect1">Charge Amount Basis<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
+    <div class="main-input">
+      <span><input class="form-control input-field" type="text" name="chargeBasis" ng-model="ppc.pDetails.chargeAmountBasis"></span>
+      <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </button>
+      <div class="dropdown-menu list-dropdown">
+        <input type="text" placeholder="select" class="search-field" ng-model="test8">
+        <ul ng-repeat="chargeAmountBasis in mc.jsonData.l_ChargeAmountBasis | filter:test8 track by $index" ng-click="ppc.selectOption('chargeAmountBasis',chargeAmountBasis)"> 
+          <li>{{chargeAmountBasis}}<li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group col-lg-4 right-padding" ng-if="mc.myDisplay">
+    <label class="col-lg-12" for="exampleSelect1">Contract Rentable<sup class="mandatory-icon">*</sup></label>
+    <div class="main-input col-lg-6">
+      <div>
+        <input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.contractRentable">
+      </div>
+    </div>
+    <div class="col-lg-6 suffix-font">Square-Feet</div>
+  </div>
+
+  <div class="form-group col-lg-4">
+    <label for="exampleSelect1">Amount Per Basis</label>
+    <input class="form-control" type="text" placeholder="0" ng-model="ppc.pDetails.amountBasis">
+  </div>
+</div>
+</div>

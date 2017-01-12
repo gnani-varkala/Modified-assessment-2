@@ -1,0 +1,134 @@
+*{
+  font-size: 14px;
+}
+
+.header-div{
+  background:rgb(234,234,234);
+  height:60px;
+}
+
+.footer-div{
+  background: rgb(229,243,226);
+  height:45px;
+  text-align: center;
+  border:1px solid rgb(229,243,226);
+}
+.main-modal{
+  height:500px;
+  overflow-y: scroll;
+}
+
+.main-input{
+  border:1px solid #d9d9d9;
+  border-radius: 5px;
+}
+.input-field{
+  width: 90%;
+  border:none
+}
+
+.icon-span{
+  width:10%;
+  float:right;
+  position: relative;
+  top: -35px;
+  border: none;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.list-dropdown{
+  margin-top: -30px;
+    margin-left: 15px;
+    width: 89%;
+    height: 100px;
+    overflow-y: scroll;
+}
+.datepicker-orient-bottom{
+  margin-left: -115px !important;
+  margin-top: 234px !important;
+}
+
+.mandatory-icon{
+  color: red;
+}
+.btn-text{
+  color: black;
+}
+.icon-color{
+  color: blue;
+}
+
+.outer-table{
+  height:auto;
+  padding: 10px 10px;
+  font-size: 16px;
+  border-bottom: 1px solid black;
+}
+
+.inner-table{
+  height:auto;
+  padding: 10px 0px  10px 0px;
+  font-size: 16px;
+  border-top: 1px solid black;
+  margin: 10px 0px 0px 0px;
+}
+
+
+.search-field{
+  width: 100%;
+    height: 34px;
+    border-radius: 5px;
+}
+
+.modal-main-div{
+  margin-left: 100px;
+}
+.main-content{
+  width:790px;
+}
+
+ .btn-class:focus{
+   border: none;
+   background: transparent;
+   outline: none;
+ }
+
+ .btn-class:hover{
+   border: none;
+   background: transparent;
+   outline: none;
+ }
+
+ .btn-class:active{
+   border: none;
+   background: transparent !important;
+   outline: none !important;
+ }
+
+.modal-border-none{
+  border: none;
+}
+
+
+.error .ng-invalid {
+        border-color: #a94442;
+    }
+
+.right-padding{
+  padding-right: 0px;
+}
+
+.suffix-font{
+  font-size: 13px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.alert-model{
+  height;100px;
+}

@@ -1,0 +1,99 @@
+
+<html ng-app="paymentApp">
+	<head>
+		<title>Payment mode</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+		<!-- angular min file -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="CSS/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+		<script src="CSS/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="JS/ui-bootstrap/ui-bootstrap-tpls-2.4.0.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="CSS\font-awesome-4.7.0\css\font-awesome.min.css">
+		<script src="JS/module.js" ></script>
+		<script src="JS/controller.js" ></script>
+		<script src="JS/service.js" ></script>
+		<script src="JS/modal.controller.js" ></script>
+		<script src="JS/paymentInformation.controller.js"></script>
+		<script src="JS/paymentParameter.controller.js"></script>
+		<script src="JS/pushService.js" ></script>
+		<script src="JS/deleteAlert.controller.js" ></script>
+		<link rel="stylesheet" href="CSS/style.css">
+	</head>
+
+
+	<body ng-controller="mainCtrl as main">
+		<div class="container-fluid">
+			<!-- outer table -->
+
+			<!-- table heading -->
+			<div class=" col-md-12 col-lg-12">
+			<div class=" col-md-12 col-lg-12 header-div" >
+			<div class="col-md-2 col-lg-2"></div>
+			<div class="col-md-2 col-lg-2 ">Frequency Type</div>
+			<div class="col-md-2 col-lg-2">Start Date</div>
+			<div class="col-md-2 col-lg-2 ">End Date</div>
+			<div class="col-md-2 col-lg-2"  >Total Cash with Tax</div>
+			<div class="col-md-2 col-lg-2">Actions</div>
+			</div>
+
+			<!-- Showing Outer table data -->
+			<div class=" col-md-12 col-lg-12 outer-table" ng-repeat="mydetails in main.myDetails" >
+			<div class="col-md-3 col-lg-3">{{mydetails.payType}}</div>
+			<div class="col-md-1 col-lg-1 offset-md-8"><i  ng-click="show = !show" ng-class="{'fa fa-angle-down': show, 'fa fa-angle-right': !show }"  aria-hidden="true"></i></div>
+
+			<!-- Showing and hiding inner table data -->
+			<div class=" col-md-12 col-lg-12 " ng-show="show">
+			<div class=" col-md-12 col-lg-12 inner-table"  ng-repeat ="data in mydetails.data" >
+			<div class="col-md-2 col-lg-2"><i class="fa fa-hourglass-half" aria-hidden="true"></i></div>
+			<div class="col-md-2 col-lg-2 ">{{data.frequecyType}}</div>
+			<div class="col-md-2 col-lg-2 ">{{data.periodStartDate}}</div>
+			<div class="col-md-2 col-lg-2 ">2/10/2017</div>
+			<div class="col-md-2 col-lg-2 ">0.00</div>
+			<div class="col-md-2 col-lg-2 ">
+			<i class="col-md-6 col-lg-6 fa fa-pencil" aria-hidden="true" ng-click="main.open('lg');main.edit($parent.$index,$index)"></i>
+			<i class="col-md-6 col-lg-6 fa fa-times" aria-hidden="true" ng-click="main.delete('lg',$parent.$index,$index)"></i>
+			</div>
+			</div>
+			</div>
+			</div>
+			<button type="button" class="col-md-12 col-lg-12 btn btn-success btn-lg  footer-div btn-text" ng-click="main.open('lg')">
+				+Add
+			</button>
+			<!-- table data -->
+			</div>
+
+			<!-- form model  -->
+			<script type="text/ng-template" id="myModalContent.html">
+			<div class="modal-header">
+				<h3 class="modal-title col-lg-11" id="modal-title">{{mc.selected.item.modalTitle}}</h3>
+				<button class="col-lg-1 btn btn-link float-xs-right" ng-click="mc.modalClose()">X</button>
+			</div>
+			<div class="modal-body main-modal" id="modal-body">
+				<ng-include  src="mc.selected.item.template"></ng-include>
+			</div>
+			<div class="modal-footer">
+				<ng-include  src="mc.selected.item.footer"></ng-include>
+			</div>
+
+			<!-- Delete alert model -->
+			<script type="text/ng-template" id="myDeleteAlert.html">
+		    <div class="modal-header">
+		     	<h3 class="modal-title" id="modal-title">Alert</h3>
+		    </div>
+		    <div class="modal-body " id="modal-body">
+		     	<p>Are sure you want to delete this</p>
+		    </div>
+		    <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" ng-click=dc.cancel()>Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click=dc.deleteConform()>Okay</button>
+		    </div>
+		</div>
+	</body>
+
+</html>
