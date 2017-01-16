@@ -101,7 +101,7 @@
     </div>
 
     <!-- input field Payment due day -->
-    <div class="form-group col-lg-4 col-md-4" ng-if="!(pic.details.frequecyType === 'Other') ">
+    <div class="form-group col-lg-4 col-md-4" ng-if="!(pic.details.frequecyType === 'Other') && (pic.details.paymentDueOn == '' ||pic.details.paymentDueOn == 'Specific Day of Period')">
       <label for="exampleSelect1">Payment Due Day<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
       <div class="main-input">
         <span><input class="form-control input-field" type="text" name="paymentDueDay" placeholder="select" ng-model="pic.details.paymentDueDay" required></span>

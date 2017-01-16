@@ -23,6 +23,7 @@
 		<script src="JS/paymentParameter.controller.js"></script>
 		<script src="JS/pushService.js" ></script>
 		<script src="JS/deleteAlert.controller.js" ></script>
+		<script src="JS/editWarning.controller.js" ></script>
 		<link rel="stylesheet" href="CSS/style.css">
 	</head>
 
@@ -72,7 +73,8 @@
 			<script type="text/ng-template" id="myModalContent.html">
 			<div class="modal-header">
 				<h3 class="modal-title col-lg-11" id="modal-title">{{mc.selected.item.modalTitle}}</h3>
-				<button class="col-lg-1 btn btn-link float-xs-right" ng-click="mc.modalClose()">X</button>
+				<button class="col-lg-1 btn btn-link float-xs-right" ng-show="mc.saveShow" ng-click="mc.modalClose()">X</button>
+				<button class="col-lg-1 btn btn-link float-xs-right" ng-hide="mc.saveShow" ng-click="mc.modalEditOpen('lg')">X</button>
 			</div>
 			<div class="modal-body main-modal" id="modal-body">
 				<ng-include  src="mc.selected.item.template"></ng-include>
@@ -93,6 +95,7 @@
 				<button type="button" class="btn btn-secondary" ng-click=dc.cancel()>Cancel</button>
 				<button type="button" class="btn btn-primary" ng-click=dc.deleteConform()>Okay</button>
 		    </div>
+
 		</div>
 	</body>
 

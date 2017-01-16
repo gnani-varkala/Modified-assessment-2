@@ -91,6 +91,13 @@
             serve.newEdit={};
         }
 
+        serve.mainModalClose = function(editFunc){
+            serve.editFunction = editFunc;
+        }
+        serve.modalVClose = function(){
+             serve.editFunction();
+        }
+
         return serve;
     }
 

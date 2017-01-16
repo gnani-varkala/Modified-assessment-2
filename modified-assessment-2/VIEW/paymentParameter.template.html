@@ -1,6 +1,6 @@
 <!-- input field Growth Type -->
 <div ng-controller="paymentParameterCtrl as ppc">
-<div class="form-group col-lg-6" ng-if="mc.myDisplay">
+<div class="form-group col-lg-6" ng-if="mc.display">
   <label for="exampleSelect1">Growth Type</label>
   <div class="main-input">
     <span><input class="form-control input-field" type="text" placeholder="select" ng-model="ppc.pDetails.growthType"></span>
@@ -16,7 +16,7 @@
 </div>
 
 <!-- input field Fixed Growth -->
-<div class="form-group col-lg-6" ng-if="(ppc.pDetails.growthType != 'Percent')&&mc.myDisplay">
+<div class="form-group col-lg-6" ng-if="(ppc.pDetails.growthType == undefined ||ppc.pDetails.growthType == 'Fixed' )&&mc.display">
   <label for="exampleSelect1">Fixed Growth</label>
   <div class="main-input">
     <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.fixedGrowth"></span>
@@ -24,7 +24,7 @@
 </div>
 
 <!-- input field Percent Growth -->
-<div class="form-group col-lg-6" ng-if="(ppc.pDetails.growthType == 'Percent') && myDisplay" >
+<div class="form-group col-lg-6" ng-if="(ppc.pDetails.growthType == 'Percent')&&mc.display">
   <label for="exampleSelect1">Percent Growth</label>
   <div class="main-input">
     <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.percentGrowth"></span>
@@ -33,7 +33,7 @@
 
 <div class="col-lg-12 col-md-12">
   <!-- input field Number of Schedules -->
-  <div class="form-group col-lg-6" ng-if="mc.myDisplay">
+  <div class="form-group col-lg-6" ng-if="mc.display">
     <label for="exampleSelect1">Number Of Schedules</label>
     <div class="main-input">
       <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.noOfSchedules"></span>
@@ -41,7 +41,7 @@
   </div>
 
   <!-- input field every month -->
-  <div class="form-group col-lg-6" ng-if="mc.myDisplay">
+  <div class="form-group col-lg-6" ng-if="mc.display">
     <label for="exampleSelect1">Adjust Every (X) Month</label>
     <div class="main-input">
       <span><input class="form-control input-field" type="text" placeholder="0" ng-model="ppc.pDetails.adjustMonth"></span>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="col-lg-12 col-md-12">
-  <div class="form-group col-lg-4" ng-if="mc.myDisplay">
+  <div class="form-group col-lg-4" ng-if="mc.display">
     <label for="exampleSelect1">Charge Amount Basis<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
     <div class="main-input">
       <span><input class="form-control input-field" type="text" name="chargeBasis" ng-model="ppc.pDetails.chargeAmountBasis"></span>
@@ -66,7 +66,7 @@
   </div>
 
 
-  <div class="form-group col-lg-4 right-padding" ng-if="mc.myDisplay">
+  <div class="form-group col-lg-4 right-padding" ng-if="mc.display">
     <label class="col-lg-12" for="exampleSelect1">Contract Rentable<sup class="mandatory-icon">*</sup></label>
     <div class="main-input col-lg-6">
       <div>

@@ -5,13 +5,12 @@
         .module('paymentApp')
         .controller('mainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['$scope','$uibModal','pushService'];
+    mainCtrl.$inject = ['$uibModal','pushService'];
 
-    function mainCtrl($scope,$uibModal,pushService) {
+    function mainCtrl($uibModal,pushService) {
       var main = {};
       main.items = [{'modalTitle':"Payment Information","template":"VIEW/paymentInformation.template.html","footer":"VIEW/paymentInformation.footer.template.html"},{'modalTitle':"Payment Parameters","template":"VIEW/paymentParameter.template.html","footer":"VIEW/paymentParameter.footer.template.html"}];
       main.myDetails = pushService.getDetails();
-      console.log(main.myDetails);
       main.edit={};
       main.edit.saveShow = true;
 
@@ -25,6 +24,8 @@
             controller: 'modalCtrl',
             controllerAs: 'mc',
             size: size,
+            backdrop: 'static',
+            keyboard: false,
             resolve: {
               items: function () {
                 return main.items;
@@ -41,6 +42,8 @@
             controller: 'deleteCtrl',
             controllerAs: 'dc',
             size: size,
+            backdrop: 'static',
+            keyboard: false,
             resolve:{
               parent : function(){
                 return parent;

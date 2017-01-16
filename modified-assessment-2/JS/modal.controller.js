@@ -5,16 +5,16 @@
         .module('paymentApp')
         .controller('modalCtrl', modalCtrl);
 
-    modalCtrl.$inject = ['$uibModalInstance','items','jsonService','pushService'];
+    modalCtrl.$inject = ['$uibModal','$uibModalInstance','items','jsonService','pushService'];
 
-    function modalCtrl($uibModalInstance, items,jsonService,pushService) {
+    function modalCtrl($uibModal,$uibModalInstance, items,jsonService,pushService) {
 
       var mc = {};
       mc.items = items;
         mc.selected = {
           item: mc.items[0]
         };
-        mc.myDisplay = true;
+        mc.display = true;
         //storing all the error message in an object
         mc.message={};
         // getting the details to object to be edited using service
@@ -24,7 +24,7 @@
         //file names for making ajax calls
         var fileName=['c_frequecyType','c_paymentType','l_AccountingType','l_ChargeAmountBasis','l_GrowthType','l_PaymentDueDay','l_PaymentDueOn','l_PaymentTiming'];
         //key names
-        var validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueDay","paymentDueOn","paymentTiming"];
+        var validateNames = [];
         mc.jsonData={}
         //ajax call is made here by using immediate invoking function
         for(var j=0;j<fileName.length;j++){
@@ -47,14 +47,24 @@
         }
         //function to check for validations
         var validateFunction = function(){
+          if(pushService.pushDetails.frequecyType == 'Other'){
+              validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentTiming"];
+          }
+          else if(pushService.pushDetails.frequecyType == 'Monthly'){
+              validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueDay","paymentTiming"];
+          }
+          else if(pushService.pushDetails.paymentDueOn != 'Specific Day of Period'){
+              validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueOn","paymentTiming"];
+          }
           var flagCheck = true;
               for(var i=0;i<validateNames.length;i++){
                 if(pushService.pushDetails[validateNames[i]] == ""){
+                  console.log(validateNames);
                   mc.message[validateNames[i]] = "Please fill out this field";
                    flagCheck=false;
                   }
                   else{
-                    flagCheck=true;
+                    mc.message[validateNames[i]] = "";
                   }
                 }
                 return flagCheck;
@@ -65,11 +75,16 @@
         mc.next=function(){
             pushService.setData();
             flag = validateFunction();
-            console.log(flag);
             if(flag == true){
               mc.selected = {
             item: mc.items[1]
           };
+            }
+            if(pushService.pushDetails.frequecyType == 'Other'){
+              mc.display = false;
+            }
+            else{
+              mc.display = true;
             }
         }
 
@@ -99,11 +114,30 @@
 
         }
         //function for model close
-        mc.modalClose = function(){
-          $uibModalInstance.dismiss('cancel');
-          pushService.pushDetails={};
+           mc.modalEditOpen = function (size) {
+          var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'VIEW/editWarning.template.html',
+            controller: 'editCtrl',
+            controllerAs: 'ec',
+            size: size,
+            backdrop: 'static',
+            keyboard: false,
+            resolve:{
+              saveShow:function(){
+                return mc.editDetail.saveShow;
+              }
+            }
+          });
         }
+            mc.modalClose = function(){
+              $uibModalInstance.dismiss('cancel');
+              pushService.pushDetails={};
+              mc.editDetail.saveShow = undefined;
+            }
 
+        pushService.mainModalClose(mc.modalClose);
         return mc;
     }
 })();
