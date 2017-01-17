@@ -2,17 +2,7 @@
 <div ng-controller="paymentParameterCtrl as ppc">
 <div class="form-group col-lg-6" ng-if="mc.display">
   <label for="exampleSelect1">Growth Type</label>
-  <div class="main-input">
-    <span><input class="form-control input-field" type="text" placeholder="select" ng-model="ppc.pDetails.growthType"></span>
-    <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    </button>
-    <div class="dropdown-menu list-dropdown">
-      <input type="text" placeholder="select" class="search-field" ng-model="test7">
-      <ul ng-repeat="growthType in mc.jsonData.l_GrowthType | filter:test7 track by $index" ng-click="ppc.selectOption('growthType',growthType)">
-        <li>{{growthType}}</li>
-      </ul>
-    </div>
-  </div>
+  <drop-down-dir data='mc.jsonData.l_GrowthType' select="ppc.pDetails.growthType" ></drop-down-dir>
 </div>
 
 <!-- input field Fixed Growth -->
@@ -52,17 +42,8 @@
 <div class="col-lg-12 col-md-12">
   <div class="form-group col-lg-4" ng-if="mc.display">
     <label for="exampleSelect1">Charge Amount Basis<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-    <div class="main-input">
-      <span><input class="form-control input-field" type="text" name="chargeBasis" ng-model="ppc.pDetails.chargeAmountBasis"></span>
-      <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      </button>
-      <div class="dropdown-menu list-dropdown">
-        <input type="text" placeholder="select" class="search-field" ng-model="test8">
-        <ul ng-repeat="chargeAmountBasis in mc.jsonData.l_ChargeAmountBasis | filter:test8 track by $index" ng-click="ppc.selectOption('chargeAmountBasis',chargeAmountBasis)"> 
-          <li>{{chargeAmountBasis}}<li>
-        </ul>
-      </div>
-    </div>
+    <drop-down-dir data='mc.jsonData.l_ChargeAmountBasis' select="ppc.pDetails.chargeAmountBasis" ></drop-down-dir>
+    <span style="color:red">{{mc.message.chargeAmountBasis}}</span>
   </div>
 
 

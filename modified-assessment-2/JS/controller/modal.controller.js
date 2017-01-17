@@ -20,17 +20,17 @@
         // getting the details to object to be edited using service
         mc.editDetail=pushService.editInModal();
         mc.saveShow = (mc.editDetail.saveShow == undefined)?true:false;
-        console.log(mc.editDetail.saveShow);
         //file names for making ajax calls
         var fileName=['c_frequecyType','c_paymentType','l_AccountingType','l_ChargeAmountBasis','l_GrowthType','l_PaymentDueDay','l_PaymentDueOn','l_PaymentTiming'];
         //key names
-        var validateNames = [];
+        var infoValidateNames = ["frequecyType","paymentType","accountingType","periodStartDate",'paymentDueDay',"paymentDueOn","paymentTiming"];
         mc.jsonData={}
         //ajax call is made here by using immediate invoking function
         for(var j=0;j<fileName.length;j++){
           (function(i){
             jsonService.paymentJson("JSON/jsons/"+fileName[i]+".json").then(function(data) {
                       mc.jsonData[fileName[i]] = [];
+                      // split functionality is done here for the data from the ajax call
                       if(fileName[i].charAt(0) === "c" ){
                         for(var k=0;k<data.length;k++){
                           var array = [];
@@ -45,40 +45,29 @@
                       }
                   });})(j)
         }
-        //function to check for validations
-        var validateFunction = function(){
-          if(pushService.pushDetails.frequecyType == 'Other'){
-              validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentTiming"];
-          }
-          else if(pushService.pushDetails.frequecyType == 'Monthly'){
-              validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueDay","paymentTiming"];
-          }
-          else if(pushService.pushDetails.paymentDueOn != 'Specific Day of Period'){
-              validateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueOn","paymentTiming"];
-          }
-          var flagCheck = true;
-              for(var i=0;i<validateNames.length;i++){
-                if(pushService.pushDetails[validateNames[i]] == ""){
-                  console.log(validateNames);
-                  mc.message[validateNames[i]] = "Please fill out this field";
-                   flagCheck=false;
-                  }
-                  else{
-                    mc.message[validateNames[i]] = "";
-                  }
-                }
-                return flagCheck;
-            }
-            var flag=true;
 
         //function call made when next button is triggered
         mc.next=function(){
+            //function to check for validations
+            if(pushService.pushDetails.frequecyType == 'Other'){
+                infoValidateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentTiming"];
+            }
+            else if(pushService.pushDetails.frequecyType == 'Monthly'){
+                infoValidateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueDay","paymentTiming"];
+            }
+            else if(pushService.pushDetails.paymentDueOn !== 'Specific Day of Period' && pushService.pushDetails.paymentDueOn !== undefined){
+                infoValidateNames = ["frequecyType","paymentType","accountingType","periodStartDate","paymentDueOn","paymentTiming"];
+            }
+
+            var flag=true;
             pushService.setData();
-            flag = validateFunction();
+            var validate= pushService.validateFunction(infoValidateNames)
+            flag=validate.flagCheck;
+            mc.message =validate.message
             if(flag == true){
               mc.selected = {
-            item: mc.items[1]
-          };
+                item: mc.items[1]
+              };
             }
             if(pushService.pushDetails.frequecyType == 'Other'){
               mc.display = false;
@@ -97,8 +86,13 @@
 
         //function to generated the values in table
         mc.generate = function(){
-           pushService.generateData();
-          $uibModalInstance.dismiss('cancel');
+             pushService.generateData();
+              mc.message =pushService.validate.message;
+             if(pushService.validate.flagCheck){
+                $uibModalInstance.dismiss('cancel');
+             }
+             
+          //  }
         }
 
         //save function for edit in first model
@@ -130,7 +124,8 @@
               }
             }
           });
-        }
+        }   
+            // function to close modal
             mc.modalClose = function(){
               $uibModalInstance.dismiss('cancel');
               pushService.pushDetails={};

@@ -1,11 +1,11 @@
 <div class="main-input">
-      <span><input class="form-control input-field" type="text" name="payType" placeholder="select" ng-model="pic.details.paymentType" required></span>
+      <span><input class="form-control input-field" type="text"  placeholder="select" ng-model="select" required></span>
       <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       </button>
       <div class="dropdown-menu list-dropdown">
-        <input type="text" placeholder="select" class="search-field" ng-model="test1">
-        <ul ng-repeat="paymentType in mc.jsonData.c_paymentType | filter:test1 track by $index" ng-click="pic.selectOption('paymentType',paymentType)">
-          <li>{{paymentType}}</li>
+        <input type="text" placeholder="select" class="search-field" ng-model="searchFilter">
+        <ul ng-repeat="list in data | filter:searchFilter track by $index" ng-click="selectOption(list)">
+          <li>{{list}}</li>
         </ul>
       </div>
     </div>

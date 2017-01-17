@@ -2,34 +2,14 @@
 <div ng-controller="paymentInformationCtrl as pic ">
   <div class="form-group col-lg-6 col-md-6">
     <label for="exampleSelect1">Payment Type<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-    <div class="main-input">
-      <span><input class="form-control input-field" type="text" name="payType" placeholder="select" ng-model="pic.details.paymentType" required></span>
-      <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      </button>
-      <div class="dropdown-menu list-dropdown">
-        <input type="text" placeholder="select" class="search-field" ng-model="test1">
-        <ul ng-repeat="paymentType in mc.jsonData.c_paymentType | filter:test1 track by $index" ng-click="pic.selectOption('paymentType',paymentType)">
-          <li>{{paymentType}}</li>
-        </ul>
-      </div>
-    </div>
+    <drop-down-dir data='mc.jsonData.c_paymentType' select="pic.details.paymentType" ></drop-down-dir>
     <span style="color:red">{{mc.message.paymentType}}</span>
   </div>
 
   <!-- input field Accounting type -->
   <div class="form-group col-lg-6 col-md-6">
     <label for="exampleSelect1">Accounting Type<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-    <div class="main-input">
-      <span><input class="form-control input-field" type="text" name="accountType" placeholder="select" ng-model="pic.details.accountingType" required></span>
-      <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      </button>
-      <div class="dropdown-menu list-dropdown">
-        <input type="text" placeholder="select" class="search-field" ng-model="test2">
-        <ul ng-repeat="AccountingType in mc.jsonData.l_AccountingType | filter:test2 track by $index" ng-click="pic.selectOption('accountingType',AccountingType)">
-          <li>{{AccountingType}}</li>
-          </ul>
-      </div>
-    </div>
+    <drop-down-dir data='mc.jsonData.l_AccountingType' select="pic.details.accountingType" ></drop-down-dir>
     <span style="color:red">{{mc.message.accountingType}}</span>
   </div>
 
@@ -38,17 +18,7 @@
     <!-- input field frequency Type -->
     <div class="form-group col-lg-4 col-md-4">
       <label for="exampleSelect1">Frequency<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-      <div class="main-input">
-        <span><input class="form-control input-field" type="text" name="frequency" placeholder="select" ng-model="pic.details.frequecyType" ng-change="value(details.typeOffrequency)" required></span>
-        <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu list-dropdown">
-          <input type="text" placeholder="select" class="search-field" ng-model="test3">
-          <ul ng-repeat="FrequencyType in mc.jsonData.c_frequecyType | filter:test3 track by $index" ng-click="pic.selectOption('frequecyType',FrequencyType)">
-            <li>{{FrequencyType}}</li>
-          </ul>
-        </div>
-      </div>
+      <drop-down-dir data='mc.jsonData.c_frequecyType' select="pic.details.frequecyType" ></drop-down-dir>
       <span style="color:red">{{mc.message.frequecyType}}</span>
     </div>
     <!-- input field Period start date -->
@@ -67,17 +37,7 @@
     <!-- input field Payment Timing -->
     <div class="form-group col-lg-4 col-md-4">
       <label for="exampleSelect1">Payment Timing<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-      <div class="main-input">
-        <span><input class="form-control input-field" type="text" name="payTime" placeholder="select" ng-model="pic.details.paymentTiming" required></span>
-        <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu list-dropdown">
-          <input type="text" placeholder="select"  class="search-field" ng-model="test4">
-          <ul ng-repeat="PaymentTiming in  mc.jsonData.l_PaymentTiming | filter:test4 track by $index" ng-click="pic.selectOption('paymentTiming',PaymentTiming)">
-            <li>{{PaymentTiming}}</li>
-          </ul>
-        </div>
-      </div>
+      <drop-down-dir data='mc.jsonData.l_PaymentTiming' select="pic.details.paymentTiming" ></drop-down-dir>
       <span style="color:red">{{mc.message.paymentTiming}}</span>
     </div>
   </div>
@@ -86,34 +46,14 @@
   <div class="col-lg-12 col-md-12">
     <div class="form-group col-lg-4 col-md-4" ng-if="!(pic.details.frequecyType === 'Other') && !(pic.details.frequecyType === 'Monthly')">
       <label for="exampleSelect1">Payment Due On<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-      <div class="main-input">
-        <span><input class="form-control input-field" type="text" name="payDue" placeholder="select" ng-model="pic.details.paymentDueOn" required></span>
-        <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu list-dropdown">
-          <input type="text" placeholder="select" class="search-field" ng-model="test5">
-          <ul ng-repeat="PaymentDue in  mc.jsonData.l_PaymentDueOn | filter:test5 track by $index" ng-click="pic.selectOption('paymentDueOn',PaymentDue)">
-            <li>{{PaymentDue}}</li>
-          </ul>
-        </div>
-      </div>
+      <drop-down-dir data='mc.jsonData.l_PaymentDueOn' select="pic.details.paymentDueOn" ></drop-down-dir>
       <span style="color:red">{{mc.message.paymentDueOn}}</span>
     </div>
 
     <!-- input field Payment due day -->
     <div class="form-group col-lg-4 col-md-4" ng-if="!(pic.details.frequecyType === 'Other') && (pic.details.paymentDueOn == '' ||pic.details.paymentDueOn == 'Specific Day of Period')">
       <label for="exampleSelect1">Payment Due Day<sup class="mandatory-icon"><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
-      <div class="main-input">
-        <span><input class="form-control input-field" type="text" name="paymentDueDay" placeholder="select" ng-model="pic.details.paymentDueDay" required></span>
-        <button class="btn btn-secondary btn-class fa fa-angle-down icon-span" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu list-dropdown">
-          <input type="text" placeholder="select" class="search-field" ng-model="test6">
-          <ul ng-repeat="PaymentDueDay in  mc.jsonData.l_PaymentDueDay | filter:test6 track by $index" ng-click="pic.selectOption('paymentDueDay',PaymentDueDay)">
-            <li>{{PaymentDueDay}}</li>
-          </ul>
-        </div>
-      </div>
+      <drop-down-dir data='mc.jsonData.l_PaymentDueDay' select="pic.details.paymentDueDay" ></drop-down-dir>
       <span style="color:red">{{mc.message.paymentDueDay}}</span>
     </div>
 
